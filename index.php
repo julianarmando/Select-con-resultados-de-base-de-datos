@@ -1,7 +1,7 @@
 <?php
-$conexion =  mysqli_connect('localhost', 'ejemplo', 'ejemplo', 'ejemplo'); 
-$ciclos = "SELECT ciclo_escolar FROM ciclos ORDER BY ciclo_escolar asc";
-$res_ciclo= mysqli_query($conexion, $ciclos);
+$conexion = new mysqli('localhost', 'ejemplo', 'ejemplo', 'ejemplo');
+$laconsulta = "SELECT id, ciclo_escolar FROM ciclos";
+$elquery = $conexion->query($laconsulta);
 ?>
 
 
@@ -11,10 +11,10 @@ $res_ciclo= mysqli_query($conexion, $ciclos);
 	<title></title>
 </head>
 <body>
-<select name="select" id="txtCiclo">
+<select name="select">
 	<?php
-	while ($result = mysqli_fetch_assoc($res_ciclo)){
-		echo "<option value='".$result['ciclo_escolar']."'> ".$result['ciclo_escolar']."</option>";
+	while ($resultado = $elquery->fetch_assoc()){
+		echo "<option value='".$resultado['id']."'>".$resultado['ciclo_escolar']."</option>";
 	}
 	?>
 </select>
